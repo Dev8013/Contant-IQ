@@ -9,10 +9,10 @@ const Navbar = () => {
         <div className='flex justify-between items-center'>
             <ul className='flex items-center gap-2'>
                <ToolCase className='icon'/>
-               <li>Contant IQ</li> 
+               <li className='font-bold'>Content IQ</li> 
             </ul>
             <ul className='flex items-center gap-4'>
-                <Link to="/home">Home</Link>
+                <Link to="/">Home</Link>
                 <Link to="/about">Pricing</Link>
                 <Link to="/contact">Contact</Link>
             </ul>

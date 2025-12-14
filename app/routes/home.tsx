@@ -2,6 +2,7 @@ import { Button } from "~/components/ui/button";
 import type { Route } from "./+types/home";
 import Navbar from "./navbar/Navbar";
 import { BarChart3, CheckCircle, ChevronRight, FileText, Lightbulb, PlayCircle, TrendingUp, Youtube } from "lucide-react";
+import Footer from "~/components/Footer";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -72,7 +73,7 @@ export default function Home() {
           <p className="text-gray-500">Save and track all your analyses to monitor content improvement over time.</p>
         </div>  
       </div>
-
     </section>
+    <Footer />
   </main>
 }
