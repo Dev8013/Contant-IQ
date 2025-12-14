@@ -1,6 +1,6 @@
 import { Button } from "~/components/ui/button";
 import type { Route } from "./+types/home";
-import Navbar from "./navbar/Navbar";
+import Navbar from "../components/Navbar";
 import { BarChart3, CheckCircle, ChevronRight, FileText, Lightbulb, PlayCircle, TrendingUp, Youtube } from "lucide-react";
 import Footer from "~/components/Footer";
 
