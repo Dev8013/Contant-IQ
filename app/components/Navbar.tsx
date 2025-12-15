@@ -13,11 +13,11 @@ const Navbar = () => {
             </ul>
             <ul className='flex items-center gap-4'>
                 <Link to="/">Home</Link>
-                <Link to="/about">Pricing</Link>
+                <Link to="/pricing">Pricing</Link>
                 <Link to="/contact">Contact</Link>
             </ul>
             <ul className='flex  items-center gap-2'>
-                <Link to="/Sign-In">Sign In</Link>
+                <Link to="/auth">Sign In</Link>
                 <Button className='px-2 py-6'>Get Started</Button>
             </ul>
         </div>
