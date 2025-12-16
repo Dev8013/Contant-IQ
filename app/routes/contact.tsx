@@ -1,5 +1,6 @@
 import { Car, MailIcon, MessageCircle, MessageCircleCode, MessageCircleDashedIcon, MessageCirclePlus, MessageCircleReply } from 'lucide-react'
 import React from 'react'
+import Footer from '~/components/Footer'
 import Navbar from '~/components/Navbar'
 import { Button } from '~/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
@@ -8,7 +9,8 @@ import { Input } from '~/components/ui/input'
 
 const contact = () => {
   return (
-    <main className='w-full min-h-screen flex flex-col'>
+    <main>
+    <div className='w-full min-h-screen flex flex-col relative top-20 gap-4'>
       <Navbar />
       <div className='flex-1 flex items-center justify-center'>
       <div className='w-full max-w-2xl px-4 text-center'>
@@ -78,6 +80,8 @@ const contact = () => {
       </Card>
       </div>
       </div>
+      <Footer />
+    </div>
     </main>
   )
 }
