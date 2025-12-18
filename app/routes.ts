@@ -5,6 +5,7 @@ export default [
     route('/auth', 'routes/auth.tsx'),
     route('/pricing', 'routes/pricing.tsx'),
     route('/contact', 'routes/contact.tsx'),
-    route('/upload', 'routes/upload.tsx')
+    route('/upload', 'routes/upload.tsx'),
+    route('/history', 'routes/history.tsx')
 
 ] satisfies RouteConfig;
