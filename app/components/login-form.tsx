@@ -15,22 +15,32 @@ import {
 } from "~/components/ui/field"
 import { Input } from "~/components/ui/input"
 import { ToolCaseIcon } from "lucide-react"
+import { usePuterStore } from "~/lib/puter"
+import { useEffect } from "react"
+import { useLocation, useNavigate } from "react-router"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const {isLoading, auth} = usePuterStore();
+  const location = useLocation();
+  const next = location.search.split('next=')[1];
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(auth.isAuthenticated) navigate('/');
+  },[auth.isAuthenticated])
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Login to <b className="text-purple-600">Content IQ</b></CardTitle>
+          <CardTitle>Welcome to <b className="text-purple-600">Content IQ</b></CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Login below to continue your journey
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          {/* <form>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -63,7 +73,24 @@ export function LoginForm({
                 </FieldDescription>
               </Field>
             </FieldGroup>
-          </form>
+          </form> */}
+          <div>
+              {
+                isLoading ? (
+                  <Button className="p-4 bg-purple-600 animate-pulse">Signing you in...</Button>
+                ):(
+                  <>
+                  {
+                    auth.isAuthenticated ? (
+                      <Button onClick={auth.signOut} className="bg-purple-600 p-4">Log Out</Button>
+                    ): (
+                       <Button onClick={auth.signIn} className="bg-purple-600 p-4">Log In</Button>
+                    )
+                  }
+                  </>
+                )
+              }
+          </div>
         </CardContent>
       </Card>
     </div>
