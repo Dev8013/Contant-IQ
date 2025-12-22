@@ -1,5 +1,5 @@
 import { FileIcon, SparkleIcon, UploadIcon } from 'lucide-react'
-import React from 'react'
+import React, { useState, type FormEvent } from 'react'
 import Footer from '~/components/Footer'
 import Navbar from '~/components/Navbar'
 import { Button } from '~/components/ui/button'
@@ -7,6 +7,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs'
 
 const upload = () => {
+    const [isProcessing, setIsProcessing] = useState();
+    const [statusText, setStatusText] = useState('');
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+
+    }
   return (
     <main>
         <div className='w-full min-h-screen flex flex-col relative top-20 gap-4'>
@@ -17,6 +22,22 @@ const upload = () => {
             </div>
             <div className='flex-1 flex items-center justify-center w-full'>
                 <div className='flex items-center justify-center w-full'>
+                    {
+                        
+                        isProcessing ? (
+                        <div className='w-full flex justify-center items-center flex-col'>
+                            <h2>{statusText}</h2>
+                            <img src="/images/resume-scan.gif" alt="" className='h-50'/>
+                        </div>
+
+                        ) : (
+
+                        <></>
+                        )
+                    }
+                    {
+                        !isProcessing && (
+                            <form onSubmit={handleSubmit}>
                     <Tabs defaultValue='youtubeVideo' className='flex items-center'>
                         <TabsList className='gap-4'>
                             <TabsTrigger value='youtubeVideo' className=' bg-purple-600 p-4'>YouTube Video</TabsTrigger>
@@ -47,10 +68,13 @@ const upload = () => {
                                     </div>
                                 </CardContent>
                                 <CardDescription className='px-6'>Drop your PDF here or click to browse and and we'll analyze content, engagement and structure.</CardDescription>
-                                <Button className='text-white bg-purple-600 p-6'><SparkleIcon />Analyze Content</Button>
+                                <Button type='submit' className='text-white bg-purple-600 p-6'><SparkleIcon />Analyze Content</Button>
                             </Card>
                         </TabsContent>
                     </Tabs>
+                    </form>
+                        )
+                    }
                 </div>
             </div>
             <Footer />
