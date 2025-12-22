@@ -1,14 +1,27 @@
 import { FileIcon, SparkleIcon, UploadIcon } from 'lucide-react'
-import React, { useState, type FormEvent } from 'react'
+import React, { useCallback, useState, type FormEvent } from 'react'
 import Footer from '~/components/Footer'
 import Navbar from '~/components/Navbar'
 import { Button } from '~/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs'
+import {useDropzone} from 'react-dropzone';
 
 const upload = () => {
     const [isProcessing, setIsProcessing] = useState();
+    // const [file, setFile] = useState<File | null>();
+
     const [statusText, setStatusText] = useState('');
+
+    const onDrop = useCallback((acceptedFiles: File[]) => {
+        const file = acceptedFiles[0] || null;
+    }, []);
+
+    
+    const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({onDrop, multiple: false, accept: {'application/pdf': ['.pdf']}, maxSize: 20*1024*1024});
+    // const handleFileSelect = (File | null) => {
+    //     setFile(file)
+    // } 1: 09:47
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 
     }
@@ -37,7 +50,7 @@ const upload = () => {
                     }
                     {
                         !isProcessing && (
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit} {...getRootProps()}>
                     <Tabs defaultValue='youtubeVideo' className='flex items-center'>
                         <TabsList className='gap-4'>
                             <TabsTrigger value='youtubeVideo' className=' bg-purple-600 p-4'>YouTube Video</TabsTrigger>
@@ -64,7 +77,7 @@ const upload = () => {
                                 </CardHeader>
                                 <CardContent className='grid gap-6'>
                                     <div className='grid gap-3'>
-                                        <input className='border p-4 rounded-sm' type='file' placeholder=''/>
+                                        <input {...getInputProps} className='border p-4 rounded-sm' type='file' placeholder=''/>
                                     </div>
                                 </CardContent>
                                 <CardDescription className='px-6'>Drop your PDF here or click to browse and and we'll analyze content, engagement and structure.</CardDescription>
