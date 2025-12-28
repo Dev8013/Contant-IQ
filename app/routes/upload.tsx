@@ -6,6 +6,9 @@ import { Button } from '~/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs'
 import { useDropzone } from 'react-dropzone'
+import { usePuterStore } from '~/lib/puter'
+import { useNavigate } from 'react-router'
+import { convertPdfToImage } from '~/lib/pdf2img'
 
 // If you use TypeScript, declare puter on window:
 // declare global {
@@ -15,6 +18,8 @@ import { useDropzone } from 'react-dropzone'
 // }
 
 const Upload = () => {
+  const {fs, isLoading, auth, ai, kv} = usePuterStore();
+  const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [statusText, setStatusText] = useState('')
@@ -37,6 +42,58 @@ const Upload = () => {
     maxSize: 20 * 1024 * 1024,
   })
 
+  const handleAnalyze = async({file}: {file: File}) => {
+    // Placeholder for analyze logic
+    setIsProcessing(true)
+    setStatusText('Analyzing content with AI...')
+    const uploadedFile = await fs.upload([file]);
+
+    if(!uploadedFile) return setStatusText('Failed to upload file for analysis.');
+
+    setStatusText('File uploaded. Processing with AI...');
+    const imageFile = await convertPdfToImage(file);
+
+    if(!imageFile.file) return setStatusText('Failed to convert PDF to image.');
+
+    setStatusText('Analysis complete! Redirecting...');
+
+    const uploadedImage = await fs.upload([imageFile.file]);
+
+    if(!uploadedImage) return setStatusText('Failed to upload converted image.');
+
+    setStatusText('Analysis complete! Redirecting...');
+
+    const uuid = crypto.randomUUID();
+
+    const data = {
+      id: uuid,
+      resumePath: uploadedFile.path,
+      imagePath: uploadedImage.path,
+      feedback: '',
+    }
+    await kv.set(`resume:${uuid}`, JSON.stringify(data));
+
+    const feedback = await ai.feedback(
+      uploadedFile.path,
+      `You are an expert in Content Analyzer For youtube, Ticktok, and Instagram.
+  Please analyze and rate the Content and suggest how to improve it.
+  The rating can be low if the Content is bad.
+  Be thorough and detailed. Don't be afraid to point out any mistakes or areas for improvement.
+  If there is a lot to improve, don't hesitate to give low scores. This is to help the user to improve their content.
+  If available, use the youtube url for the job user is applying to to give more detailed feedback.
+  If provided, take the youtube url  into consideration.
+  Return the analysis as a JSON object, without any other text and without the backticks.
+  Do not include any other text or comments.`
+    )
+    if(!feedback) return setStatusText('AI analysis failed.');
+    
+    const feedbackText = typeof feedback.message.content === 'string' ? feedback.message.content : feedback.message.content[0].text;
+    data.feedback = JSON.parse(feedbackText);
+    await kv.set(`resume:${uuid}`, JSON.stringify(data));
+    setStatusText('Analysis complete! Redirecting...');
+    console.log(data)
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -46,6 +103,8 @@ const Upload = () => {
       console.log('YouTube URL:', youtubeUrl)
       return
     }
+
+    handleAnalyze({file});
 
     if (!window.puter || !window.puter.fs || !window.puter.fs.upload) {
       console.error('Puter.js is not loaded')
