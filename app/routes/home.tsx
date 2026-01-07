@@ -3,6 +3,7 @@ import type { Route } from "./+types/home";
 import Navbar from "../components/Navbar";
 import { BarChart3, CheckCircle, ChevronRight, FileText, Lightbulb, PlayCircle, TrendingUp, Youtube } from "lucide-react";
 import Footer from "~/components/Footer";
+import { Link } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -28,7 +29,7 @@ export default function Home() {
       {/* Buttons */}
       <div className="flex items-cente justify-center mt-4 gap-2">
         <Button className="bg-purple-600 p-6">Start Analyzing For Free <ChevronRight /></Button>
-        <Button className="p-6">View Pricing</Button>
+        <Button className="p-6"><Link to="/pricing">View Pricing</Link></Button>
       </div>
       {/* Middle Div */}
       <div className="font-semibold justify-center text-center mt-20 space-y-4">
