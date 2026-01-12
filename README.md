@@ -2,40 +2,49 @@
   <img src="public/thumnail.png" alt="Content Analysis Tool Thumbnail" width="600" />
 </p>
 
+<h1 align="center">Content Analysis Tool</h1>
 
-Content Analysis Tool
-A modern web application for analyzing various content types (YouTube videos, PDFs, resumes, images) using React + Vite, TypeScript, Bun/Puter.js, shadcn/ui, and Zustand. Provides detailed scores, insights, and actionable improvements.
+<p align="center">
+  A modern web application for analyzing YouTube videos, PDFs, resumes, and images.<br />
+  Built with <b>React + Vite</b>, <b>TypeScript</b>, <b>Puter.js</b>, <b>shadcn/ui</b>, and <b>Zustand</b>.
+</p>
 
-✨ Features
-Multi-format Analysis: YouTube videos, PDFs, resumes, images
+---
 
-Comprehensive Scoring: Quality, readability, engagement metrics
+## ✨ Features
 
-Actionable Improvements: Specific recommendations for enhancement
+- **Multi-format analysis**: YouTube videos, PDFs, resumes, images  
+- **Comprehensive scoring**: Quality, readability, engagement metrics  
+- **Actionable improvements**: Specific recommendations and suggestions  
+- **Real-time processing**: Fast, interactive analysis feedback  
+- **Responsive UI**: Built with shadcn/ui and Tailwind CSS  
+- **Type-safe**: End-to-end TypeScript  
+- **State management**: Lightweight global state with Zustand  
 
-Real-time Processing: Instant analysis feedback
+---
 
-Responsive UI: Beautiful shadcn/ui components
+## 🛠️ Tech Stack
 
-Type-safe: Full TypeScript implementation
+| Category   | Technology                          |
+|-----------|--------------------------------------|
+| Frontend  | React 18, Vite, TypeScript           |
+| Runtime   | Bun / Puter.js                       |
+| UI        | shadcn/ui, Tailwind CSS             |
+| State     | Zustand                              |
+| Analysis  | Custom ML models, NLP / LLM APIs     |
 
-State Management: Efficient Zustand store
+---
 
-🛠️ Tech Stack
-Category	Technology
-Frontend	React 18, Vite, TypeScript
-Runtime	Bun / Puter.js
-UI	shadcn/ui, Tailwind CSS
-State	Zustand
-Analysis	Custom ML models, NLP APIs
-🚀 Quick Start
-Prerequisites
-Node.js 18+ or Bun
+## 🚀 Quick Start
 
-Yarn / npm / Bun
+### Prerequisites
 
-Installation
-bash
+- Node.js 18+ or Bun  
+- npm / Yarn / Bun (any one)
+
+### Installation
+
+```bash
 # Clone the repository
 git clone <your-repo-url>
 cd content-analysis-tool
@@ -51,105 +60,68 @@ yarn install
 bun dev
 # or
 npm run dev
-App runs at: http://localhost:5173
+# or
+yarn dev
+```
+The app will be available at:
+http://localhost:5173
 
 📁 Project Structure
-text
 src/
-├── components/     # shadcn/ui components + custom
-├── lib/           # Utils, API clients, analysis logic
-├── stores/        # Zustand state management
-├── types/         # TypeScript definitions
-├── hooks/         # Custom React hooks
-└── app/           # Main app components
+├── components/     # shadcn/ui components + custom UI
+├── lib/            # Utils, API clients, analysis logic
+├── stores/         # Zustand state management
+├── types/          # TypeScript definitions
+├── hooks/          # Custom React hooks
+└── app/            # Main app entry & pages
+
 🎯 Usage
-Upload Content: Drag & drop or select YouTube URL/PDF/Image/Resume
+Upload content: Drag & drop or paste a YouTube URL / upload PDF / image / resume.
 
-Analysis Runs: AI processes content (2-10 seconds)
+Run analysis: The AI pipeline processes the content (typically 2–10 seconds).
 
-View Results: Score breakdown + improvement suggestions
+View results: See score breakdown, insights, and detailed suggestions.
 
-Export: PDF/JSON report download
+Export: Download a PDF/JSON report of the analysis.
 
 Example Analysis Output
-text
 📊 Resume Score: 82/100
 ✅ Strengths: Strong technical skills, relevant experience
-⚠️ Improvements: 
+⚠️ Improvements:
   - Add quantifiable achievements
   - Improve formatting consistency
-  - Include GitHub links
-🔧 Configuration
-Create .env.local:
+  - Include GitHub / portfolio links
 
-text
-VITE_ANALYSIS_API_KEY=your_api_key
-VITE_YOUTUBE_API_KEY=your_youtube_key
 🧪 Testing
-bash
 # Run tests
 bun test
 # or
 npm run test
+# or
+yarn test
+
 🚀 Deployment
-bash
 # Build for production
 bun run build
+# or
+npm run build
+# or
+yarn build
 
 # Preview production build
 bun run preview
-Recommended: Vercel, Netlify, Cloudflare Pages
+# or
+npm run preview
+# or
+yarn preview
 
 📊 Analysis Features
-Content Type	Metrics Analyzed	Score Categories
-YouTube	Engagement, SEO, Retention	Watch Time, CTR, Quality
-PDFs	Readability, Structure	Clarity, Formatting
-Resumes	ATS Score, Impact	Experience, Skills
-Images	Quality, Composition	Clarity, Relevance
-🎨 UI Components
-File upload with drag & drop
+| Content Type | Metrics Analyzed              | Score Categories                 |
+| ------------ | ----------------------------- | -------------------------------- |
+| YouTube      | Engagement, SEO, retention    | Watch time, CTR, content quality |
+| PDFs         | Readability, structure        | Clarity, formatting              |
+| Resumes      | ATS score, impact, relevance  | Experience, skills, keywords     |
+| Images       | Quality, composition, context | Clarity, relevance               |
 
-Real-time analysis progress
-
-Score cards with radial progress
-
-Improvement suggestion panels
-
-Responsive result tables
-
-Dark/Light theme toggle
-
-📈 State Management (Zustand)
-typescript
-// stores/analysisStore.ts
-interface AnalysisState {
-  results: AnalysisResult[]
-  isAnalyzing: boolean
-  score: number
-  improvements: string[]
-}
 🤝 Contributing
 Fork the repository
-
-Create feature branch (git checkout -b feature/amazing-feature)
-
-Commit changes (git commit -m 'Add amazing feature')
-
-Push to branch (git push origin feature/amazing-feature)
-
-Open Pull Request
-
-📄 License
-MIT License - see LICENSE file.
-
-🙌 Acknowledgments
-shadcn/ui - Beautiful components
-
-Vite - Lightning-fast builds
-
-Zustand - Simple state management
-
-Bun - Fast runtime
-
-⭐ Star this repo if you found it useful!
-🔥 Built with ❤️ for content creators & job seekers
