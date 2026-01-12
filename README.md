@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/thumail.png" alt="Content Analysis Tool Thumbnail" width="600" />
+  <img src="public/thumnail.png" alt="Content Analysis Tool Thumbnail" width="600" />
 </p>
 
 
